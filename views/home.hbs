@@ -1,0 +1,67 @@
+<div class="flex flex-col w-auto h-screen">
+    <nav class="flex bg-blue-500 p-5 font-mono text-xl justify-between">
+        <p class="p-4">Bienvenido</p>
+        <div><img class="h-12" id="cartIco" src="./images/cart.png" alt="" srcset=""></div>
+        <div>
+            <img class="max-h-40" src={{userAvatar}} alt="avatar">
+            <span> {{usuario}}</span>
+            <button onclick="location.href ='/deslogueo'"> || Desloguearse</button>
+        </div>
+    </nav>
+    <main class="flex flex-col  items-center bg-cyan-500  m-0">
+        <div >
+            <table class="table-auto m-10 text-2xl bg-green-400 ">
+                <thead>
+                    <tr class="p-5 m-5 ">
+                        <td class="p-5 font-mono text-3xl">Nombre</td>
+                        <td class="p-5 font-mono text-3xl">Precio</td>
+                        <td class="p-5 font-mono text-3xl">Imagen</td>
+                    </tr>
+                </thead>
+                {{#each productos}}
+                <tbody>
+                    <tr>
+                        <td class="p-5 font-mono text-3xl">{{this.name}}</td>
+                        <td class="p-5 font-mono text-3xl">$ {{this.price}}</td>
+                        <td class="p-5 font-mono text-3xl"><img class="max-h-60" src={{this.img}} alt="logo producto"></td>
+                        <td class="p-5 font-mono text-3xl"> <button  class="text-white bg-black" onclick="location.href=`/{{this.id}}`">ver producto</button></td>
+                    </tr>
+                </tbody>
+                {{/each}}
+            </table>
+        </div>
+        {{!-- CENTRO DE MENSAJES TEMPORALMENTE DESHABILITADOS
+        <h1 class="font-mono font-extrabold text-5xl m-5 p-5 " >Centro de Mensajes</h1>
+        <h4 class="text-3xl font-bold font-mono underline m-4" id="compresion">Compresión de los mensajes </h4>
+            <div>
+            <form action="" class="flex flex-col text-center items-center bg-cyan-500 p-4 formMensaje">
+                <label for="user" class="font-mono">Email</label>
+                <input type="email" class="text-center" id="user" required>
+                <label for="nombre" class="font-mono">Nombre</label>
+                <input type="text" class="text-center" id="nombre" required>
+                <label for="apellido" class="font-mono">Apellido</label>
+                <input type="text" class="text-center" id="apellido" required>
+                <label for="edad" class="font-mon">Edad</label>
+                <input type="number" class="text-center" id="edad" required>
+                <label for="apodo" class="font-mono">Apodo</label>
+                <input type="text" class="text-center" id="apodo" required>
+                <label for="avatar" class="font-mono">Avatar</label>
+                <input type="text" class="text-center" id="avatar" required>
+                <label class="font-mono">Deja tu mensaje</label>
+                <textarea name="contenidoMensaje" id="contenidoMensaje" cols="25" rows="5" required></textarea>
+                <button id="enviar" class="border-solid text-white border-2 border-sky-500 bg-gradient-to-r from-blue-700 to-purple-600 font-mono m-6 p-2 shadow-md">Enviar Mensaje</button>
+            </form>
+            <p class="font-mono" >Desde el Servidor: <span id="mensajeRecibido"></span></p>
+            <div class="p-5 m-5 bg-white ">
+                <p class="font-mono flex flex-col" id="historial"></p>
+            </div>
+            </div> --}}
+    </main>
+    {{> footer}}
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+</script>
+<script src="/scripts/script.js"></script>
+    
