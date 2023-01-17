@@ -6,6 +6,7 @@ export type ProductoDocument = HydratedDocument<Productos>
 
 @Schema()
 export class Productos {
+    
     @Prop({ required: true })
     name: string;
 

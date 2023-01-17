@@ -1,7 +1,8 @@
-import { Controller, Get , Render , Request , Post, Body, Param } from '@nestjs/common';
+import { Controller, Get , Render , Request , Post, Body, Param, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger/dist';
 import { AuthService } from './auth/auth.service';
 import { UserLoginDTO } from './auth/dto/userLogin.dto';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { ProductosService } from './productos/productos.service';
 import { CreateUserDto } from './users/dto/create-user.dto';
 
@@ -21,6 +22,7 @@ export class AppController {
   registro(){
     return { msg: 'aca se registra' }
   }
+  
   @Post('login')
   async login(@Body() userLogin: UserLoginDTO){
     return await this.authService.login(userLogin)
@@ -47,23 +49,23 @@ export class AppController {
   registroSuccess(){
     return { msg: 'Registrado correctamente' }
   }
-
+  @UseGuards(JwtAuthGuard)
   @Get('home')
   @Render('home')
   async home(){
     const productos = await this.ProductosService.listarTodo();
-    const usuario = ["user"];
-    const userAvatar = ["img"] ;
-    return { productos , usuario , userAvatar }
+    return { productos }
   }
   
-  @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @Get('/product/:id')
   @Render('product')
   async product(@Param('id') id: string){
     const productId = await this.ProductosService.listar(id)
     return { productId }
   }
-
+  
+  @UseGuards(JwtAuthGuard)
   @Get('cart')
   @Render('product')
   async cart(){

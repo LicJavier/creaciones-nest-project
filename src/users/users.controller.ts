@@ -6,8 +6,8 @@ import { User } from './models/user.schema';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger/dist/decorators';
 
 @ApiBearerAuth()
-@ApiTags('users')
-@Controller('users')
+@ApiTags('usuarios')
+@Controller('usuarios')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -18,7 +18,8 @@ export class UsersController {
 
   @Get()
   findAll():Promise<User[]> {
-    return this.usersService.findAll();
+    const users = this.usersService.findAll();
+    return users
   }
 
   @Get(':id')

@@ -10,15 +10,15 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ProductosModule,
+    UsersModule,
+    AuthModule,
     MongooseModule.forRoot(process.env.MONGO_URL,{
       connectionName: 'productos',
     }), 
     MongooseModule.forRoot(process.env.MONGO_URL,{
       connectionName: 'usuarios',
-    }),
-    ProductosModule,
-    UsersModule,
-    AuthModule,
+    })
   ],
   controllers: [AppController],
   providers: [AppService],

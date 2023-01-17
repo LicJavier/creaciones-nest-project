@@ -7,9 +7,7 @@ import { SwaggerModule } from '@nestjs/swagger';
 import { DocumentBuilder } from '@nestjs/swagger/dist';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule,{
-  logger: ['error', 'warn'],
-});
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   
   //HANDLEBARS
   app.useStaticAssets(join(__dirname, '..', 'public'));
@@ -30,8 +28,9 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   //PUERTO DE APLICACION
-  await app.listen(8080,()=>{
-    console.log('servidor en linea')
+  const PORT = process.env.PORT;
+  await app.listen(PORT,()=>{
+    console.log(`Servidor en linea en puerto: ${PORT}`)
   });
 }
 bootstrap();

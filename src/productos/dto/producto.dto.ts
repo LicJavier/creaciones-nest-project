@@ -24,5 +24,4 @@ export class ActualizarProductoDTO{
 
     readonly img : string;
 
-    readonly id: string;
 }
