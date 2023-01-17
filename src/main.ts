@@ -16,7 +16,7 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
   hbs.registerPartials(join(__dirname, '..', '/views/partials'));
-  app.set('view options', { layout: './layouts/main' })
+  app.set('view options', { layout: './layouts/main' });
   
   //SWAGGER
   const config = new DocumentBuilder()

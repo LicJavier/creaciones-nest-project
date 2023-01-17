@@ -4,7 +4,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './models/user.schema';
-import { Usuario } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +14,7 @@ export class UsersService {
     return await newUser.save();
   }
 
-  async findAll(){
+  async findAll(): Promise<User[]>{
     return await this.userModel.find().exec();
   }
 
